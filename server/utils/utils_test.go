@@ -93,6 +93,13 @@ func TestParseInput(t *testing.T) {
 			ExpectedOptions:  []string{"B", "C"},
 			ExpectedSettings: []string{"anonymous", "abc"},
 		},
+		"With duration setting": {
+			Input:            `/poll "A" "B" "C" --duration=1`,
+			Trigger:          "poll",
+			ExpectedQuestion: "A",
+			ExpectedOptions:  []string{"B", "C"},
+			ExpectedSettings: []string{"duration=1"},
+		},
 	} {
 		t.Run(name, func(t *testing.T) {
 			assert := assert.New(t)

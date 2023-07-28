@@ -37,6 +37,10 @@ var (
 		ID:    "command.default.no",
 		Other: "No",
 	}
+	// commandDefaultPollDuration = &i18.Message{
+	// 	ID: "command.duration.48",
+	// 	Other: "Default duration is 48 Hours",
+	// }
 
 	commandHelpTextSimple = &i18n.Message{
 		ID:    "command.help.text.simple",
@@ -65,6 +69,10 @@ var (
 	commandHelpTextPollSettingMultiVote = &i18n.Message{
 		ID:    "command.help.text.pollSetting.multi-vote",
 		Other: "Allow users to vote for X options",
+	}
+	commandHelpTextPollDuration = &i18n.Message{
+		ID:    "command.help.text.pollSetting.poll-duration",
+		Other: "Set how long a pull will last in hours",
 	}
 
 	commandErrorGeneric = &i18n.Message{
@@ -132,7 +140,8 @@ func (p *MatterpollPlugin) executeCommand(args *model.CommandArgs) (string, *mod
 		msg += "- `--anonymous`: " + p.bundle.LocalizeDefaultMessage(userLocalizer, commandHelpTextPollSettingAnonymous) + "\n"
 		msg += "- `--progress`: " + p.bundle.LocalizeDefaultMessage(userLocalizer, commandHelpTextPollSettingProgress) + "\n"
 		msg += "- `--public-add-option`: " + p.bundle.LocalizeDefaultMessage(userLocalizer, commandHelpTextPollSettingPublicAddOption) + "\n"
-		msg += "- `--votes=X`: " + p.bundle.LocalizeDefaultMessage(userLocalizer, commandHelpTextPollSettingMultiVote)
+		msg += "- `--votes=X`: " + p.bundle.LocalizeDefaultMessage(userLocalizer, commandHelpTextPollSettingMultiVote) + "\n"
+		msg += "- `--duration: " + p.bundle.LocalizeDefaultMessage(userLocalizer, commandHelpTextPollDuration)
 
 		return msg, nil
 	}
