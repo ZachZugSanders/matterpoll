@@ -129,7 +129,7 @@ func (p *MatterpollPlugin) isActivated() bool {
 	return p.activated
 }
 
-// patchBotDescription updates the bot description based on the servers local
+// patchBotDescription updates the bot description based on the servers locale
 func (p *MatterpollPlugin) patchBotDescription() error {
 	publicLocalizer := p.bundle.GetServerLocalizer()
 	description := p.bundle.LocalizeDefaultMessage(publicLocalizer, botDescription)

@@ -57,6 +57,10 @@ var (
 		ID:    "response.endPoll.invalidPermission",
 		Other: "Only the creator of a poll and System Admins are allowed to end it.",
 	}
+	reponsePollExpiration = &i18n.Message{
+		ID:    "reponse.endPoll.expired",
+		Other: "The poll has ended because the duration has elapsed",
+	}
 
 	responseDeletePollSuccess = &i18n.Message{
 		ID:    "response.deletePoll.success",
@@ -77,6 +81,8 @@ func (p *MatterpollPlugin) InitAPI() *mux.Router {
 	apiV1 := r.PathPrefix("/api/v1").Subrouter()
 	apiV1.Use(checkAuthenticity)
 	apiV1.HandleFunc("/configuration", p.handlePluginConfiguration).Methods(http.MethodGet)
+
+	apiV1.HandleFunc("/list/polls", p.handleListActivePollsRequest).Methods(http.MethodGet)
 
 	apiV1.HandleFunc("/polls/create", p.handleSubmitDialogRequest(p.handleCreatePoll)).Methods(http.MethodPost)
 	pollRouter := apiV1.PathPrefix("/polls/{id:[a-z0-9]+}").Subrouter()
@@ -133,6 +139,10 @@ func checkAuthenticity(next http.Handler) http.Handler {
 
 		next.ServeHTTP(w, r)
 	})
+}
+
+func (p *MatterpollPlugin) handleListActivePollsRequest(w http.ResponseWriter, r *http.Request) {
+	return
 }
 
 func (p *MatterpollPlugin) handlePostActionIntegrationRequest(handler postActionHandler) http.HandlerFunc {
